@@ -1,52 +1,137 @@
-# MLmisFinder Replication Package🕵️‍♂️🔍
+# MLmisFinder: Replication Package and TSE Extension 🕵️‍♂️🔍
 
-This repository contains the replication package for the paper "_MLmisFinder: A Specification and Detection Approach of Machine Learning Service Misuses_," accepted at the 33rd IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER) in December 2025. The package provides all resources needed to reproduce the experiments and results presented in the paper.
+This repository contains the replication package for:
 
-**MLmisFinder** is a powerful tool designed to help you detect six misuses while using ML services. This tool scans your machine learning codebase, identifies common misuse patterns, and provides actionable insights to help ensure that best practices are followed. Whether you're working with model training, data processing, or deployment, **MLmisFinder** offers easy-to-use features to identify issues that might affect the accuracy and performance of your models.
+> **MLmisFinder: A Specification and Detection Approach of Machine Learning Service Misuses**
+> Published at the 33rd IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER 2026).
 
-## 🚀 Features
+This fork is also being extended with the artifacts for the journal manuscript:
 
-- **Comprehensive ML service Misuse Detection**: Automatically identifies common misuses in machine learning services-based systems such as None specification of early stopping criteria, Not using training checkpoint and more. ⚠️
-- **Easy Integration**: Seamlessly integrates with existing codebases, workflows, and cloud environments. 🌐
-- **Real-time Alerts**: Get immediate feedback on detected misuses to quickly address issues before they escalate. ⚡
-- **Reporting & Logs**: Generates detailed reports of misuse detection with clear explanations and suggested fixes. 📊
+> **Automated Detection and LLM-Based Refactoring of ML Cloud Service Misuses**
 
-## 📥 Installation
+## Repository Status
 
-To get started with **MLmisFinder**, you need to install the package. You can install it using `pip`: pip install -r requirements.txt
+The original SANER 2026 replication package is available in this repository. Additional files for the TSE journal extension are currently being prepared and will be added progressively.
 
+The journal extension expands the original work with:
 
-## 🧑‍💻 Usage
+* A comparison between GPT-5 and MLmisFinder for misuse detection.
+* An LLM-based pipeline for automatically refactoring detected misuses.
+* An evaluation of four LLMs for refactoring accuracy and execution time.
+* Manually annotated refactoring outputs.
+* A multi-model LLM-as-judge evaluation protocol.
+* Additional datasets, prompts, scripts, and experimental results.
 
-To use **MLmisFinder** with an Excel file containing GitHub URLs, follow these steps:
+## About MLmisFinder
 
-- **Step 1**: Prepare an Excel file (`repos_data.xlsx`) with a column named `GitHub URL` that contains the URLs of the repositories you want to check.
-- **Step 2**: Upload the Excel file to your Python environment.
-- **Step 3**: Run **MLmisFinder** to process each GitHub URL in the file and detect potential misuses.
-  python scripts/run_all.py
-- **Step 4**: Review the misuse reports generated for each URL.
+**MLmisFinder** is an automated, provider-agnostic static-analysis approach for detecting misuses of machine-learning cloud services. It analyzes Python-based systems that use services from Amazon Web Services, Microsoft Azure, and Google Cloud.
 
-### Example of the Excel file structure:
+MLmisFinder detects the following seven misuse types:
 
-| GitHub URL                        |
-|------------------------------------|
-| https://github.com/user/repo1      |
-| https://github.com/user/repo2      |
-| https://github.com/user/repo3      |
+1. Not using batch APIs for data processing.
+2. Not using training checkpoints.
+3. Non-specification of early-stopping criteria.
+4. Ignoring testing-schema mismatches.
+5. Misinterpreting model outputs.
+6. Improperly handling ML API limits.
+7. Ignoring monitoring for data drift.
 
-## Reproducibility
-To reproduce the results reported in this study, please use the following commit:
+The tool uses a reusable metamodel and rule-based detection algorithms to identify misuse patterns without requiring runtime information.
 
-- Repository commit: `b74927b44b06c4d1ccc6f1e0603b0f576ddddadf`
+## Features
 
-This ensures you are using the exact code version tested in our experiments.
+* **Provider-agnostic analysis:** Supports ML services from AWS, Microsoft Azure, and Google Cloud.
+* **Automated static analysis:** Examines source code and service configurations without executing the analyzed projects.
+* **Seven misuse detectors:** Identifies misuse patterns affecting the reliability, performance, cost, and maintainability of ML service-based systems.
+* **Batch repository analysis:** Processes multiple GitHub repositories supplied through an Excel file.
+* **Structured results:** Produces reports describing the detected misuse instances.
+* **Extensible design:** Supports the future addition of providers, services, and misuse-detection rules.
 
-## How to Cite
-If you use this package, please cite our paper:
+## Installation
 
-Hadil Ben Amor, Niruthiha Selvanayagam, Manel Abdellatif, Taher A. Ghaleb, and Naouel Moha.  
-*MLmisFinder: A Specification and Detection Approach of Machine Learning Service Misuses.*  
-In **Proceedings of the IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)**, 2026.
+Clone the repository and install the required dependencies:
 
+```bash
+git clone https://github.com/YOUR-USERNAME/MLmisFinder.git
+cd MLmisFinder
+pip install -r requirements.txt
+```
 
+Replace `YOUR-USERNAME` with the GitHub username that owns this fork.
 
+## Usage
+
+MLmisFinder can analyze a collection of GitHub repositories supplied through an Excel file.
+
+### Step 1: Prepare the input file
+
+Create an Excel file named `repos_data.xlsx` containing a column named `GitHub URL`.
+
+Example:
+
+| GitHub URL                    |
+| ----------------------------- |
+| https://github.com/user/repo1 |
+| https://github.com/user/repo2 |
+| https://github.com/user/repo3 |
+
+### Step 2: Add the input file
+
+Place `repos_data.xlsx` in the location expected by the analysis script.
+
+### Step 3: Run MLmisFinder
+
+```bash
+python scripts/run_all.py
+```
+
+### Step 4: Review the results
+
+Review the generated reports to identify the detected ML cloud service misuses.
+
+## TSE Extension Artifacts
+
+The following materials will be added for the journal extension:
+
+* GPT-5 misuse-detection prompts and outputs.
+* Detection results comparing GPT-5 and MLmisFinder.
+* LLM-based refactoring prompts and scripts.
+* Refactoring outputs generated by the evaluated models.
+* Manual refactoring annotations.
+* Execution-time measurements.
+* LLM-as-judge prompts, outputs, and majority-vote results.
+* Instructions for reproducing the journal experiments.
+
+This section will be updated as the new artifacts are finalized.
+
+## Reproducing the SANER 2026 Results
+
+To reproduce the results reported in the SANER 2026 paper, use the following commit:
+
+```text
+b74927b44b06c4d1ccc6f1e0603b0f576ddddadf
+```
+
+This commit identifies the exact version of the code and artifacts used for the conference study. A separate tagged release or commit will be provided for the TSE journal extension once its replication package is complete.
+
+## Citation
+
+If you use the original MLmisFinder approach or SANER replication package, please cite:
+
+```text
+Hadil Ben Amor, Niruthiha Selvanayagam, Manel Abdellatif,
+Taher A. Ghaleb, and Naouel Moha.
+“MLmisFinder: A Specification and Detection Approach of
+Machine Learning Service Misuses.”
+In Proceedings of the 33rd IEEE International Conference on
+Software Analysis, Evolution and Reengineering (SANER), 2026.
+DOI: 10.1109/SANER67736.2026.00037.
+```
+
+Citation information for the TSE journal extension will be added if the manuscript is accepted and published.
+
+## Original Repository
+
+This repository is a working fork of the original MLmisFinder repository maintained by Hadil Ben Amor and collaborators:
+
+https://github.com/hadil1999-creator/MLmisFinder
